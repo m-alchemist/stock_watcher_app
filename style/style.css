@@ -1,3 +1,7 @@
+body{
+  background-image: url('http://www.adamelements.com/iKlips_DUO/img/grey-bg.jpg') ;
+  background-size:cover;
+}
 #container {
     max-width: 800px;
     height: 400px;
@@ -56,3 +60,56 @@ td {
 .btn{
   margin:2px;
 }
+.title{
+  color:red;
+  font-family: 'Cinzel', serif;
+
+  text-align: center;
+  font-size: 80px;
+  margin: 40px;
+
+}
+p{
+  font-family: 'Cinzel', serif;
+  font-color:red;
+}
+
+.tickerButton {
+	-moz-box-shadow:inset 0px 39px 0px -24px #e67a73;
+	-webkit-box-shadow:inset 0px 39px 0px -24px #e67a73;
+	box-shadow:inset 0px 39px 0px -24px #e67a73;
+	background-color:#e4685d;
+	-moz-border-radius:4px;
+	-webkit-border-radius:4px;
+	border-radius:4px;
+	border:1px solid #ffffff;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:15px;
+	padding:6px 15px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #b23e35;
+}
+.tickerButton:hover {
+	background-color:#e05447;
+}
+.tickerButton:active {
+	position:relative;
+	top:1px;
+}
+
+.glow a{
+
+  color:  black;
+
+}
+
+.glow a :hover {
+  color:red;
+
+}
+
+
+@import url('https://fonts.googleapis.com/css?family=Cinzel')

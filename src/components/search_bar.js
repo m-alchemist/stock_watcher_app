@@ -20,6 +20,7 @@ componentDidMount(){
   this.socket.on('stockHistory',data=>{
     console.log('chatting yo');
     console.log('stockHistory',data);
+    this.setState(this.state.currentStocks:data)
     data.map((stock)=>{
       if(this.props.tickerArray.indexOf(stock<0)){
           this.props.getStockData({ticker:stock})
@@ -27,10 +28,11 @@ componentDidMount(){
       })
   })
   this.socket.on('addStock',currentStock=>{
-
-    this.setState({currentStocks:[currentStock, ...this.state.currentStocks]})
+    if(this.state.currentStocks.indexOf(currentStock)<0){
+    this.setState({currentStocks:[ ...this.state.currentStocks,currentStock]})
 
           this.props.getStockData({ticker:currentStock})
+        }
 
   })
   this.socket.on('removeStock',currentStock=>{
@@ -77,8 +79,8 @@ componentDidMount(){
     if(this.props.tickerArray){
     return this.props.tickerArray.map((item)=>{
 
-      return(<button key={item.name} onClick={this.handleButtonSubmit.bind(this,item.name)}  className='btn btn-danger'>
-             X {item.name}
+      return(<button key={item.name} onClick={this.handleButtonSubmit.bind(this,item.name)}  className='tickerButton'>
+             x {item.name}
                </button>)
     })
   }
@@ -119,7 +121,7 @@ componentDidMount(){
 
           <label>Ticker</label>
           <input
-          className='form-control'
+          className='form-control '
            value={this.state.term}
            onChange={this.onInputChange}
 

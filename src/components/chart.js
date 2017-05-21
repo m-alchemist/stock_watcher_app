@@ -16,6 +16,7 @@ class Chart extends Component{
  */
 function createChart() {
 
+
     Highcharts.stockChart('container', {
 
         rangeSelector: {
@@ -52,13 +53,14 @@ function createChart() {
     });
   }
    var seriesOptions=[]
+   if(this.props.data.length>0){
    for(var i=0;i<this.props.data.length;i++){
 
    seriesOptions.push({name:this.props.data[i].name,data:this.props.data[i].data})
 
 }
     createChart();
-
+}
 
 }
 
@@ -76,7 +78,7 @@ function createChart() {
 
 }
 function mapStatetoProps(state){
-  
+
   return{
     data: state.data
   }

@@ -9,10 +9,11 @@ export default class App extends Component {
 
     return (
       <div>
+        <h1 className='title'> Stock Market App</h1>
 
         <Chart />
         <SearchBar />
-      
+
       </div>
 
     );

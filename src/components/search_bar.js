@@ -18,9 +18,10 @@ componentDidMount(){
 
   this.socket=io('/');
   this.socket.on('stockHistory',data=>{
-    console.log('chatting yo');
-    console.log('stockHistory',data);
+
+
     this.setState(this.state.currentStocks:data)
+
     data.map((stock)=>{
       if(this.props.tickerArray.indexOf(stock<0)){
           this.props.getStockData({ticker:stock})
@@ -75,7 +76,7 @@ componentDidMount(){
   }
 }
   renderTickerButton=()=>{
-
+        console.log('state:',this.state.currentStocks);
     if(this.props.tickerArray){
     return this.props.tickerArray.map((item)=>{
 

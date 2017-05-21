@@ -76,7 +76,7 @@ componentDidMount(){
   }
 }
   renderTickerButton=()=>{
-        console.log('state:',this.state.currentStocks);
+
     if(this.props.tickerArray){
     return this.props.tickerArray.map((item)=>{
 
@@ -91,9 +91,6 @@ componentDidMount(){
   }
   handleFormSubmit(event){
     const body=event;
-
-
-
     if( body){
       var tickerExists=false;
       this.props.tickerArray.map((item)=>{
@@ -103,6 +100,7 @@ componentDidMount(){
             }
           })
       if(!tickerExists){
+        this.setState({currentStocks:[ ...this.state.currentStocks,body]})
         this.socket.emit('addStock',body);
         this.props.getStockData({ticker:body})  }
         this.setState({term:''});
@@ -111,6 +109,9 @@ componentDidMount(){
     }
     handleButtonSubmit(event){
       const body=event;
+      var arr=this.state.currentStocks;
+      arr=arr.splice(arr.indexOf(body),1)
+      this.setState({currentStocks:arr})
         this.socket.emit('removeStock',body);
       this.props.removeStockData({ticker:body})
       }
@@ -120,7 +121,7 @@ componentDidMount(){
     return(
       <div>
 
-          <label>Ticker</label>
+          <label><p>Ticker</p></label>
           <input
           className='form-control '
            value={this.state.term}

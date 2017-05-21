@@ -16,16 +16,23 @@ export default function(state=[], action){
 
   switch (action.type){
     case FETCH_STOCK_DATA:
+    //double check if ticker already exists
+      var tickerExists=false
+      state.map((item)=>{
+        if(item.name==action.payload.data.Elements[0].Symbol){
+            tickerExists=true;
+        }
 
-
-    // return state.concat([action.payload.data]);
-
-
+      })
+      if(tickerExists){
+        return state
+      }
       var data=join(action.payload.data.Dates,
         action.payload.data.Elements[0].DataSeries.close.values)
       var tickerDataObj={name:action.payload.data.Elements[0].Symbol, data:data}
         var newArr=[...state,tickerDataObj];
-      
+
+
       return newArr ;
     case REMOVE_STOCK_DATA:
         var newArr=[];

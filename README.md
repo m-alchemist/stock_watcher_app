@@ -1,25 +1,15 @@
-# ReduxSimpleStarter
+# Stock Chart App
 
-Interested in learning [Redux](https://www.udemy.com/react-redux/)?
+This is a real time application created using React-Redux, Socket Io, and Mongodb to chart the stock market.
 
-### Getting Started
+This project was made for FCC baseJump. It meets the following criteria:
+User Story: I can view a graph displaying the recent trend lines for each added stock.
 
-There are two methods for getting started with this repo.
+User Story: I can add new stocks by their symbol name.
 
-#### Familiar with Git?
-Checkout this repo, install dependencies, then start the gulp process with the following:
+User Story: I can remove stocks.
 
-```
-> git clone https://github.com/StephenGrider/ReduxSimpleStarter.git
-> cd ReduxSimpleStarter
-> npm install
-> npm start
-```
+User Story: I can see changes in real-time when any other user adds or removes a stock.
 
-#### Not Familiar with Git?
-Click [here](https://github.com/StephenGrider/ReactStarter/releases) then download the .zip file.  Extract the contents of the zip file, then open your terminal, change to the project directory, and:
 
-```
-> npm install
-> npm start
-```
+Link to live app: https://stock-watcher-app-malchemist.herokuapp.com

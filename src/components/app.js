@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-
+import SearchBar from './search_bar';
+import Chart from './chart';
 export default class App extends Component {
   render() {
     return (
-      <div>React simple starter</div>
+      <div>
+
+        <Chart />
+        <SearchBar />
+      </div>
+
     );
   }
 }

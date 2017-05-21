@@ -5,7 +5,9 @@
   "main": "index.js",
   "repository": "git@github.com:StephenGrider/ReduxSimpleStarter.git",
   "scripts": {
-    "start": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
+    "start": "node server.js",
+    "postinstall": "webpack -p",
+    "dev": "node ./node_modules/webpack-dev-server/bin/webpack-dev-server.js",
     "test": "mocha --compilers js:babel-core/register --require ./test/test_helper.js --recursive ./test",
     "test:watch": "npm run test -- --watch"
   },
@@ -27,6 +29,7 @@
     "jsdom": "^8.1.0",
     "lodash": "^3.10.1",
     "mocha": "^2.4.5",
+    "mongoose": "^4.10.0",
     "path": "^0.12.7",
     "react": "^0.14.3",
     "react-addons-test-utils": "^0.14.7",

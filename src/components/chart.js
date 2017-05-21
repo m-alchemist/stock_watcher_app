@@ -6,6 +6,7 @@ const proxy = 'https://cors-anywhere.herokuapp.com/';
 
 
 class Chart extends Component{
+
   renderChart(){
 
 
@@ -52,7 +53,7 @@ function createChart() {
   }
    var seriesOptions=[]
    for(var i=0;i<this.props.data.length;i++){
-     console.log('here here',this.props.data[i])
+
    seriesOptions.push({name:this.props.data[i].name,data:this.props.data[i].data})
 
 }
@@ -66,7 +67,7 @@ function createChart() {
     return (
       <div id='container'>
       {this.renderChart()}
-        
+
       </div>
 
     )
@@ -75,7 +76,7 @@ function createChart() {
 
 }
 function mapStatetoProps(state){
-  // console.log('at chart',state.data)
+  
   return{
     data: state.data
   }

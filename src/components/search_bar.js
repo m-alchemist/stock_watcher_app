@@ -4,16 +4,48 @@ import {Field, reduxForm} from 'redux-form';
 import * as actions from '../actions';
 import $ from 'jquery';
 import _ from 'lodash';
-
+import io from 'socket.io-client';
 
 class SearchBar extends Component{
   constructor(props,context){
     super(props,context);
     this.state={term:'',
-    dropdown:[]}
+    dropdown:[],
+  currentStocks:[]
   }
+}
+componentDidMount(){
+
+  this.socket=io('/');
+  this.socket.on('stockHistory',data=>{
+    console.log('chatting yo');
+    console.log('stockHistory',data);
+    data.map((stock)=>{
+      if(this.props.tickerArray.indexOf(stock<0)){
+          this.props.getStockData({ticker:stock})
+        }
+      })
+  })
+  this.socket.on('addStock',currentStock=>{
+
+    this.setState({currentStocks:[currentStock, ...this.state.currentStocks]})
+
+          this.props.getStockData({ticker:currentStock})
+
+  })
+  this.socket.on('removeStock',currentStock=>{
+
+    var arr=this.state.currentStocks;
+    arr=arr.splice(arr.indexOf(currentStock),1)
+    this.setState({currentStocks:arr})
+
+          this.props.removeStockData({ticker:currentStock})
+
+  })
+}
 
      onInputChange=(event)=>{
+
     const  body=event.target.value
     this.setState({term:body});
     var _this = this;
@@ -22,18 +54,17 @@ class SearchBar extends Component{
     }
     if (body.length>1){
     const proxy = 'https://cors-anywhere.herokuapp.com/';
-    console.log('here',this.state.dropdown[0]);
+
     $.getJSON(`${proxy}http://dev.markitondemand.com/MODApis/api/v2/Lookup/json?input=${body}`,function(data,err){
-      // console.log('Data',data);
+
       if(err)
-      console.log(err)
-        console.log(data);
+
         _this.setState({dropdown:data})
       })
     }
   }
   renderListItem=()=>{
-    if(this.state.dropdown){// console.log('render list',this.state.dropdown[0])
+    if(this.state.dropdown){
     return this.state.dropdown.map((item)=>{
       return(<li key={item.Symbol} onClick={this.handleFormSubmit.bind(this,item.Symbol)}  className='list-group-item'>
              {item.Symbol}   ({item.Name})
@@ -42,10 +73,10 @@ class SearchBar extends Component{
   }
 }
   renderTickerButton=()=>{
-    console.log(this.props.tickerArray)
-    if(this.props.tickerArray){// console.log('render list',this.state.dropdown[0])
+
+    if(this.props.tickerArray){
     return this.props.tickerArray.map((item)=>{
-      console.log(item.name);
+
       return(<button key={item.name} onClick={this.handleButtonSubmit.bind(this,item.name)}  className='btn btn-danger'>
              X {item.name}
                </button>)
@@ -57,18 +88,19 @@ class SearchBar extends Component{
   }
   handleFormSubmit(event){
     const body=event;
-    console.log(body);
 
-    // console.log('at search bar',ticker.toLowerCase());
+
+
     if( body){
       var tickerExists=false;
       this.props.tickerArray.map((item)=>{
         if(item.name==body){
           tickerExists=true;
-          console.log(tickerExists)
+
             }
           })
       if(!tickerExists){
+        this.socket.emit('addStock',body);
         this.props.getStockData({ticker:body})  }
         this.setState({term:''});
           this.setState({dropdown:[]});
@@ -76,6 +108,7 @@ class SearchBar extends Component{
     }
     handleButtonSubmit(event){
       const body=event;
+        this.socket.emit('removeStock',body);
       this.props.removeStockData({ticker:body})
       }
 

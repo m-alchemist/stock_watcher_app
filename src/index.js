@@ -6,7 +6,7 @@ import ReduxPromise from 'redux-promise';
 import App from './components/app';
 import reducers from './reducers';
 import ReduxThunk from 'redux-thunk'
-
+import io from 'socket.io-client';
 const createStoreWithMiddleware = applyMiddleware(ReduxThunk,ReduxPromise)(createStore);
 
 ReactDOM.render(

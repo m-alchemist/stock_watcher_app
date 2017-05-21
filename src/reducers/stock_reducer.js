@@ -1,5 +1,5 @@
 import {FETCH_STOCK_DATA, REMOVE_STOCK_DATA} from '../actions/index';
-
+import io from 'socket.io-client';
 
 function join(array1, array2){
   var result=[];
@@ -20,12 +20,12 @@ export default function(state=[], action){
 
     // return state.concat([action.payload.data]);
 
-        console.log(action.payload);
+
       var data=join(action.payload.data.Dates,
         action.payload.data.Elements[0].DataSeries.close.values)
       var tickerDataObj={name:action.payload.data.Elements[0].Symbol, data:data}
         var newArr=[...state,tickerDataObj];
-        console.log(newArr);
+      
       return newArr ;
     case REMOVE_STOCK_DATA:
         var newArr=[];

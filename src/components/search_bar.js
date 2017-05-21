@@ -20,7 +20,7 @@ componentDidMount(){
   this.socket.on('stockHistory',data=>{
 
 
-    this.setState({this.state.currentStocks:data})
+    this.setState({currentStocks:data})
 
     data.map((stock)=>{
       if(this.props.tickerArray.indexOf(stock<0)){
